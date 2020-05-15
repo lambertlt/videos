@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+  <title>休闲时间</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script>
+    (function () {
+      document.addEventListener('visibilitychange', function () { //浏览器切换事件
+        if (document.visibilityState == 'hidden') { //状态判断
+          //normal_title=document.title;
+          document.title = '你去干嘛了?';
+          // document.getElementById('icon').target = "_blank"    
+          // href = '../images/leaveIcon.png';
+        } else {
+          document.title = '欢迎回来!';
+          // document.getElementById('icon').target = "_blank"
+          // href = '../images/icon.png'; //需要修改的图片路径
+          setTimeout(function () {
+            document.title = '休闲时间';
+          }, 2000) //计时器
+        }
+      })
+    }())
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      outline: none;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 0;
+      font-size: 14px;
+      color: white;
+      width: 100%;
+      line-height: 40px;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    #pages {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      background: url(./mouse.jpg);
+    }
+
+    .form-group {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-control {
+      width: 60%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="pages" v-if="!videoUrl">
+    <div class="nav">power by lambert</div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="请输入视频资源链接" v-model="url" />
+      <button class="btn btn-danger" @click="getVideoUrl()">获取视频</button>
+    </div>
+    <iframe v-if="videoUrl" id="iframe" :src="`https://z1.m1907.cn/?jx= ${videoUrl}`" allowtransparency="true"
+      frameborder="0" scrolling="no" allowfullscreen="true" allowtransparency="true"></iframe>
+  </div>
+  <script type="text/javascript">
+    var t
+    var vm = new Vue({
+      el: '#pages',
+      data() {
+        return {
+          url: '',
+          videoUrl: ''
+        }
+      },
+      methods: {
+        getVideoUrl() {
+          // https://www.eggvod.cn/jx.php?lrspm=282716866&zhm_jx=
+          // https://z1.m1907.cn/?jx=
+          if (this.url == '' || this.url == undefined) {
+            alert("视频链接不能为空!!!")
+            return;
+          }
+          this.videoUrl = `https://z1.m1907.cn/?jx=` + this.url
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
