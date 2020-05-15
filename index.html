@@ -29,27 +29,18 @@
     }())
   </script>
   <style>
+    html {
+      font-size: 14px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       outline: none;
     }
 
-    iframe {
-      width: 100%;
-      height: 100vh;
-    }
-
-    .footer {
-      position: fixed;
-      bottom: 0;
-      font-size: 14px;
-      color: white;
-      width: 100%;
-      line-height: 40px;
-      display: flex;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.6);
+    li {
+      list-style: none;
     }
 
     #pages {
@@ -63,22 +54,110 @@
     }
 
     .form-group {
-      width: 100%;
+      width: 80%;
       display: flex;
       justify-content: center;
     }
 
     .form-control {
-      width: 60%;
+      flex: 3
+    }
+
+    iframe {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .jump {
+      width: 80%;
+      display: flex;
+      align-items: center;
+    }
+
+    .jump ul {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
+    .jump ul li {
+      padding: 2px 5px;
+    }
+
+    .jump ul li a {
+      color: black;
+      font-size: 20px;
+    }
+
+    .jump ul li a:hover {
+      color: rgb(22, 132, 223);
+    }
+
+    .nav {
+      width: 80%;
+      background: rgba(255, 114, 114, 0.6);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav ul {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
+    .nav ul li {
+      padding: 2px 5px;
+    }
+
+    .nav ul li a {
+      color: black;
+      font-size: 16px;
+    }
+
+    .nav ul li a:hover {
+      color: rgb(22, 132, 223);
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      font-size: 14px;
+      color: white;
+      width: 100%;
+      line-height: 40px;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
     }
   </style>
 </head>
 
-<body>
+<body ontouchstart>
   <div id="pages">
+    <div class="jump">
+      <ul>
+        跳转：
+        <li><a href="https://www.iqiyi.com/" target="_blank">爱奇艺</a></li>
+        <li><a href="https://www.youku.com/" target="_blank">优酷</a></li>
+        寻片~
+      </ul>
+    </div>
     <div v-if="!videoUrl" class="form-group">
       <input class="form-control" type="text" placeholder="请输入视频资源链接" v-model="url" />
       <button class="btn btn-danger" @click="getVideoUrl()">获取视频</button>
+    </div>
+    <div class="nav">
+      <ul>
+        站主爱看：
+        <template v-for="(item, index) in siteList">
+          <li><a :href="item.url" target="_blank" :key="index">{{item.name}}</a></li>
+        </template>
+      </ul>
     </div>
     <iframe v-if="videoUrl" id="iframe" :src="`https://z1.m1907.cn/?jx=${videoUrl}`" allowtransparency="true"
       frameborder="0" scrolling="no" allowfullscreen="true" allowtransparency="true"></iframe>
@@ -86,12 +165,20 @@
   </div>
 
   <script type="text/javascript">
+    var baseUrl = "https://z1.m1907.cn/?jx="
     var vm = new Vue({
       el: '#pages',
       data() {
         return {
           url: '',
-          videoUrl: ''
+          videoUrl: '',
+          siteList: [{
+            name: "博人传",
+            url: baseUrl + "https://www.iqiyi.com/v_19ryhexwic.html"
+          }, {
+            name: "黑色四叶草",
+            url: baseUrl + "https://www.iqiyi.com/v_19rrdzingg.html"
+          }]
         }
       },
       methods: {
