@@ -166,7 +166,7 @@
     </div>
     <div v-if="!videoUrl" class="form-group">
       <input class="form-control" type="text" placeholder="请输入视频资源链接" v-model="url" />
-      <button class="btn btn-danger" @click="getVideoUrl()">获取视频</button>
+      <button class="btn btn-danger" @click="getVideoUrl()">跳转播放视频</button>
     </div>
     <div class="nav">
       <ul>
@@ -176,9 +176,8 @@
         </template>
       </ul>
     </div>
-    <iframe v-if="videoUrl" id="iframe" :src="`https://okjx.cc/?url=${videoUrl}`" ></iframe>
-<!--    allowtransparency="true"
-      frameborder="0" scrolling="no" allowfullscreen="true" allowtransparency="true"  -->
+<!--     <iframe v-if="videoUrl" id="iframe" :src="`https://okjx.cc/?url=${videoUrl}`" allowtransparency="true"
+      frameborder="0" scrolling="no" allowfullscreen="true" allowtransparency="true"></iframe> -->
     <div class="footer">power by lambert </div>
   </div>
   <script type="text/javascript">
@@ -204,8 +203,7 @@
             alert("视频链接不能为空!!!")
             return;
           }
-          this.videoUrl = `https://okjx.cc/?url=` + this.url
-          console.log(this.videoUrl)
+          window.location.href = `https://okjx.cc/?url=` + this.url
         }
       }
     })
