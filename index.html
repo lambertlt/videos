@@ -181,7 +181,7 @@
     <div class="footer">power by lambert </div>
   </div>
   <script type="text/javascript">
-    var baseUrl = "https://z1.m1907.cn/?jx="
+    var baseUrl = "https://okjx.cc/?url="
     var vm = new Vue({
       el: '#pages',
       data() {
@@ -199,13 +199,11 @@
       },
       methods: {
         getVideoUrl() {
-          // https://www.eggvod.cn/jx.php?lrspm=282716866&zhm_jx=
-          // https://z1.m1907.cn/?jx=
           if (this.url == '' || this.url == undefined) {
             alert("视频链接不能为空!!!")
             return;
           }
-          this.videoUrl = `https://z1.m1907.cn/?jx=` + this.url
+          this.videoUrl = `https://okjx.cc/?url=` + this.url
           console.log(this.videoUrl)
         }
       }
